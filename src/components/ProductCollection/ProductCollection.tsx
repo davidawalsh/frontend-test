@@ -3,10 +3,11 @@ import {
   useProductsService,
   useTags,
   useFetchTags,
+  useSubscription,
 } from "./ProductCollection.hooks";
 
 const ProductCollection = () => {
-  const [subscription, setSubscription] = useState(false);
+  const { subscription, handleSubscriptionChange } = useSubscription();
   const { tags, handleTagChange } = useTags();
   const { serverTags } = useFetchTags();
   const { data, error, loading } = useProductsService({ tags, subscription });
@@ -36,7 +37,7 @@ const ProductCollection = () => {
             type="checkbox"
             id="subscription"
             value="subscription"
-            onChange={() => setSubscription(!subscription)}
+            onChange={handleSubscriptionChange}
           />
           <label htmlFor="subscription">Available on subscription</label>
         </div>

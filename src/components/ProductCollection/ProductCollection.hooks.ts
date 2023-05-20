@@ -65,6 +65,18 @@ export const useTags = () => {
   return { tags, handleTagChange };
 };
 
+export const useSubscription = () => {
+  const [subscription, setSubscription] = useState<boolean>(false);
+
+  const handleSubscriptionChange = (event: {
+    target: { checked: boolean };
+  }) => {
+    setSubscription(event.target.checked);
+  };
+
+  return { subscription, handleSubscriptionChange };
+};
+
 export const useFetchTags = () => {
   const [serverTags, setServerTags] = useState<string[]>([]);
   const [error, setError] = useState<Error | null>(null);
