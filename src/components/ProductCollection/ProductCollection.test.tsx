@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import ProductCollection from "./ProductCollection";
+import { ProductCollection } from "./ProductCollection";
 
 describe("ProductCollection", () => {
   beforeEach(async () => {

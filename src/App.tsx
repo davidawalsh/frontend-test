@@ -1,4 +1,4 @@
-import ProductCollection from "./components/ProductCollection/ProductCollection";
+import { ProductCollection } from "./components/ProductCollection";
 
 function App() {
   return (

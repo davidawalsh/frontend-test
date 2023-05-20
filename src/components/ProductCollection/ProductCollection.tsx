@@ -5,8 +5,9 @@ import {
   useSubscription,
   useMaxPrice,
 } from "./ProductCollection.hooks";
+import { ProductCard } from "../ProductCard";
 
-const ProductCollection = () => {
+export const ProductCollection = () => {
   const { subscription, handleSubscriptionChange } = useSubscription();
   const { maxPrice, handleMaxPriceChange } = useMaxPrice();
   const { tags, handleTagChange } = useTags();
@@ -81,5 +82,3 @@ const ProductCollection = () => {
     </div>
   );
 };
-
-export default ProductCollection;
