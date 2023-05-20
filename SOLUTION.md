@@ -20,11 +20,11 @@ Spent: 3.2 hours
 - Display "subscription" and the discount. I'd need clarification on the discount value. I assume its a percentage but wouldn't want to calculate a number without knowing I'm showing the right value (30mins)
 - scheme.org markup for SEO (30mins)
 - ux improvements (2hour)
-  -- hover states on product cards
-  -- improve styles on tags
-  -- make the whole product card clickable
-  -- make the filter sidebar sticky on desktop
-  -- hook a filter button to the bottom of the page on mobile devices, that loads a modal with the filter options.
+  - hover states on product cards
+  - improve styles on tags
+  - make the whole product card clickable
+  - make the filter sidebar sticky on desktop
+  - hook a filter button to the bottom of the page on mobile devices, that loads a modal with the filter options.
 - change urls on the filteration, so that they are shareable. (30mins)
 - when no products are returned, display a more user friendly message, and button to reset the filters. (30mins)
 
