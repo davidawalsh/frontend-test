@@ -13,7 +13,3 @@ export type Product = {
   subscription_discount: number | string;
   subscription: boolean;
 };
-
-export type ProductsResponse = {
-  products: Product[];
-};

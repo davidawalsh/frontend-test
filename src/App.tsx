@@ -1,10 +1,11 @@
-import * as React from "react";
-import "./App.css";
+import ProductCollection from "./components/ProductCollection/ProductCollection";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">HELLO WORLD</header>
+    <div>
+      <main>
+        <ProductCollection />
+      </main>
     </div>
   );
 }
