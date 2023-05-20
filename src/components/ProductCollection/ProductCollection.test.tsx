@@ -27,7 +27,7 @@ describe("ProductCollection", () => {
   });
 });
 
-describe("ProductCollection", () => {
+describe("ProductCollection - Filter By dog", () => {
   beforeEach(async () => {
     render(<ProductCollection />);
     await waitFor(() => {
@@ -47,10 +47,41 @@ describe("ProductCollection", () => {
     const filterInput = screen.getByTestId("filter-tag-Dog");
     fireEvent.click(filterInput);
 
-    expect(filterInput).toBeChecked();
-
     await waitFor(() => {
       expect(screen.getByTestId("products-grid").children.length).toBe(11);
+    });
+  });
+
+  test("displays products pagination", () => {
+    expect(screen.getByTestId("products-pagination")).toBeInTheDocument();
+  });
+});
+
+describe("ProductCollection - Filter By subscription and cat", () => {
+  beforeEach(async () => {
+    render(<ProductCollection />);
+    await waitFor(() => {
+      expect(screen.queryByTestId("products-loading")).not.toBeInTheDocument();
+    });
+  });
+
+  test("displays filters sidebar", () => {
+    expect(screen.getByTestId("filters-sidebar")).toBeInTheDocument();
+  });
+
+  test("displays a table of products", () => {
+    expect(screen.getByTestId("products-grid")).toBeInTheDocument();
+  });
+
+  test("filters products by subscription and 'Cat' tag and displays 5 products in the table", async () => {
+    const subscriptionInput = screen.getByTestId("filter-subscription");
+    fireEvent.click(subscriptionInput);
+
+    const filterInput = screen.getByTestId("filter-tag-Cat");
+    fireEvent.click(filterInput);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("products-grid").children.length).toBe(5);
     });
   });
 

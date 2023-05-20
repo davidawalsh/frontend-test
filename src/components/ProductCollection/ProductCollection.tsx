@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   useProductsService,
   useTags,
@@ -6,15 +6,17 @@ import {
 } from "./ProductCollection.hooks";
 
 const ProductCollection = () => {
+  const [subscription, setSubscription] = useState(false);
   const { tags, handleTagChange } = useTags();
   const { serverTags } = useFetchTags();
-  const { data, error, loading } = useProductsService({ tags });
+  const { data, error, loading } = useProductsService({ tags, subscription });
 
   return (
     <div>
       <div data-testid="filters-sidebar">
         <h1>Filters</h1>
         <div>
+          <h2>Tags</h2>
           {serverTags.map((tag) => (
             <div key={tag}>
               <input
@@ -27,6 +29,16 @@ const ProductCollection = () => {
               <label htmlFor={tag}>{tag}</label>
             </div>
           ))}
+          <h2>Subscription</h2>
+
+          <input
+            data-testid="filter-subscription"
+            type="checkbox"
+            id="subscription"
+            value="subscription"
+            onChange={() => setSubscription(!subscription)}
+          />
+          <label htmlFor="subscription">Available on subscription</label>
         </div>
       </div>
       <div>

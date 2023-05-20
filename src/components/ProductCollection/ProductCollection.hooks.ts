@@ -9,10 +9,12 @@ type ProductsServiceResponse = {
 
 type ProductsServiceProps = {
   tags: string[];
+  subscription: boolean;
 };
 
 export const useProductsService = ({
   tags,
+  subscription,
 }: ProductsServiceProps): ProductsServiceResponse => {
   const [data, setData] = useState<Product[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -25,6 +27,7 @@ export const useProductsService = ({
           `${process.env.REACT_APP_API_ENDPOINT}/products` || ""
         );
         tags.length && url.searchParams.append("tags_like", tags.join("|"));
+        subscription && url.searchParams.append("subscription", "true");
 
         const response = await fetch(url.toString()); // Replace with your API endpoint
         if (!response.ok) {
@@ -40,7 +43,7 @@ export const useProductsService = ({
     };
 
     fetchData();
-  }, [tags]);
+  }, [tags, subscription]);
 
   return { data, error, loading };
 };
