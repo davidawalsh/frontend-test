@@ -1,0 +1,21 @@
+.product-collection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 2rem;
+}
+
+.filters-sidebar {
+  flex-basis: 300px;
+}
+
+.product-area {
+  flex-basis: calc(100% - 300px);
+  flex-grow: 1;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+}

@@ -5,9 +5,10 @@ import {
   useSubscription,
   useMaxPrice,
 } from "./ProductCollection.hooks";
+import "./ProductCollection.css";
 import { ProductCard } from "../ProductCard";
 
-export const ProductCollection = () => {
+const ProductCollection = () => {
   const { subscription, handleSubscriptionChange } = useSubscription();
   const { maxPrice, handleMaxPriceChange } = useMaxPrice();
   const { tags, handleTagChange } = useTags();
@@ -19,8 +20,8 @@ export const ProductCollection = () => {
   });
 
   return (
-    <div>
-      <div data-testid="filters-sidebar">
+    <div className="product-collection">
+      <div data-testid="filters-sidebar" className="filters-sidebar">
         <h1>Filters</h1>
         <div>
           <h2>Tags</h2>
@@ -61,17 +62,15 @@ export const ProductCollection = () => {
           <span>Max Price: {maxPrice}</span>
         </div>
       </div>
-      <div>
+      <div className="product-area">
         <h1>Products</h1>
         {loading && <div data-testid="products-loading">Loading...</div>}
         {error && <div>{error.message}</div>}
         {!data && <div>No Results For Your Selection</div>}
         {data && (
-          <div data-testid="products-grid">
+          <div data-testid="products-grid" className="products-grid">
             {data.map((product) => (
-              <div key={product.id}>
-                <h2>{product.title}</h2>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         )}
@@ -82,3 +81,5 @@ export const ProductCollection = () => {
     </div>
   );
 };
+
+export { ProductCollection };
