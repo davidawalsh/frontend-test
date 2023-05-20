@@ -89,3 +89,35 @@ describe("ProductCollection - Filter By subscription and cat", () => {
     expect(screen.getByTestId("products-pagination")).toBeInTheDocument();
   });
 });
+
+describe("ProductCollection - Filter By price", () => {
+  beforeEach(async () => {
+    render(<ProductCollection />);
+    await waitFor(() => {
+      expect(screen.queryByTestId("products-loading")).not.toBeInTheDocument();
+    });
+  });
+
+  test("displays filters sidebar", () => {
+    expect(screen.getByTestId("filters-sidebar")).toBeInTheDocument();
+  });
+
+  test("displays a table of products", () => {
+    expect(screen.getByTestId("products-grid")).toBeInTheDocument();
+  });
+
+  test("filters products by max price of 30 and displays 1 product in the table", async () => {
+    const maxPriceInput = screen.getByTestId(
+      "filter-price"
+    ) as HTMLInputElement;
+    fireEvent.change(maxPriceInput, { target: { value: "30" } });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("products-grid").children.length).toBe(1);
+    });
+  });
+
+  test("displays products pagination", () => {
+    expect(screen.getByTestId("products-pagination")).toBeInTheDocument();
+  });
+});

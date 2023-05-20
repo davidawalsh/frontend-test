@@ -10,11 +10,13 @@ type ProductsServiceResponse = {
 type ProductsServiceProps = {
   tags: string[];
   subscription: boolean;
+  maxPrice: number;
 };
 
 export const useProductsService = ({
   tags,
   subscription,
+  maxPrice,
 }: ProductsServiceProps): ProductsServiceResponse => {
   const [data, setData] = useState<Product[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -28,6 +30,7 @@ export const useProductsService = ({
         );
         tags.length && url.searchParams.append("tags_like", tags.join("|"));
         subscription && url.searchParams.append("subscription", "true");
+        url.searchParams.append("price_lte", maxPrice.toString());
 
         const response = await fetch(url.toString()); // Replace with your API endpoint
         if (!response.ok) {
@@ -43,7 +46,7 @@ export const useProductsService = ({
     };
 
     fetchData();
-  }, [tags, subscription]);
+  }, [tags, subscription, maxPrice]);
 
   return { data, error, loading };
 };
@@ -75,6 +78,16 @@ export const useSubscription = () => {
   };
 
   return { subscription, handleSubscriptionChange };
+};
+
+export const useMaxPrice = () => {
+  const [maxPrice, setMaxPrice] = useState<number>(200);
+
+  const handleMaxPriceChange = (event: { target: { value: string } }) => {
+    setMaxPrice(Number(event.target.value));
+  };
+
+  return { maxPrice, handleMaxPriceChange };
 };
 
 export const useFetchTags = () => {

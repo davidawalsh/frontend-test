@@ -3,13 +3,19 @@ import {
   useTags,
   useFetchTags,
   useSubscription,
+  useMaxPrice,
 } from "./ProductCollection.hooks";
 
 const ProductCollection = () => {
   const { subscription, handleSubscriptionChange } = useSubscription();
+  const { maxPrice, handleMaxPriceChange } = useMaxPrice();
   const { tags, handleTagChange } = useTags();
   const { serverTags } = useFetchTags();
-  const { data, error, loading } = useProductsService({ tags, subscription });
+  const { data, error, loading } = useProductsService({
+    tags,
+    subscription,
+    maxPrice,
+  });
 
   return (
     <div>
@@ -39,6 +45,19 @@ const ProductCollection = () => {
             onChange={handleSubscriptionChange}
           />
           <label htmlFor="subscription">Available on subscription</label>
+        </div>
+        <div>
+          <h2>Max Price</h2>
+          <input
+            data-testid="filter-price"
+            type="range"
+            min="0"
+            max="200"
+            step="10"
+            value={maxPrice}
+            onChange={handleMaxPriceChange}
+          />
+          <span>Max Price: {maxPrice}</span>
         </div>
       </div>
       <div>
